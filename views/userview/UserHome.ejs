@@ -1,0 +1,342 @@
+
+<body>
+  
+      <%- include('./partials/navBarLeft')%>
+  
+
+    <section class="container-fluid mx-auto ">
+      <!-- Banner -->
+      <!-- Carousel wrapper -->
+      <%if (banners!=null){%>
+      <div
+        id="carouselVideoExample"
+        class="carousel slide carousel-fade mx-auto"
+        data-bs-ride="carousel"
+        style="position: relative; margin-top: 6rem;"
+      >
+        <!-- Inner -->
+        <div class="carousel-inner h-75">
+          <!-- Single item -->
+          <%banners.forEach(banner => {%>
+          <div class="carousel-item active h-75" style="background-position: center; background-size: cover;">
+            <%if(banner.videoURL){%>
+              <video class="img-fluid" autoplay loop muted>
+                <source src="<%=banner.videoURL%>" type="video/mp4" />
+              </video>
+            <%}%>
+            <img src="/public/img/banners/<%=banner.image%>" alt="" style="object-fit: cover; height: auto; width: 100%; aspect-ratio: 3;">
+            <a href="/products/">
+              <div
+                class="carousel-caption d-lg-block d-none"
+                style="position: absolute; top: 10%; left: 20%;"
+              >
+                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 1.7rem" class="text-danger">
+                  <%=banner.title%>
+                </h3>
+                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 1rem" class="text-danger">
+                  <%=banner.description%>
+                </p>
+              </div>
+            </a>
+            <a href="/<%=banner.url%>">
+              <div
+                class="carousel-caption d-block d-lg-none"
+                style="position: absolute"
+              >
+                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 0.8rem">
+                  <%=banner.title%>
+                </h3>
+                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 0.5rem">
+                  <%=banner.description%>
+                </p>
+              </div>
+            </a>
+          </div>
+          <%})%>
+        </div>
+        <!-- Inner -->
+
+        <!-- Controls -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselVideoExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselVideoExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <%}%>
+      <!-- Carousel wrapper -->
+      <!-- banner -->
+
+      <% if(newReleases != null){%>
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">New Releases</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+          <% newReleases.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-60 border-0 rounded">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product. frontImage%>"
+                  class="card-img-top p-2 h-60 w-50"
+                  alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1 ;"
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    class="my-2"
+                    ><%=product.brand.name%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 mt-5"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+      <%}%>
+      <!-- <img
+        class="w-100 my-3 rounded"
+        src="../../public/img/design/banner.jpg"
+        alt=""
+      /> -->
+
+      <!--IOS -->
+      <div class="line-break text-center py-2">
+        <span class="shadow-heading" style="font-size: 1rem">IOS</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+          <%ios.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-60 border-0 p-3">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product. frontImage%>"
+                  class="card-img-top p-2 h-50 w-50"
+                  alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1 ;"
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    class="my-2"
+                    ><%=product.brand.name%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 mt-5"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">ANDROID</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div
+          class="row row-cols-1 row-cols-md-4 g-4 mb-3 justify-content-center"
+        >
+          <% android.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-60 border-0 p-3">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product. frontImage%>"
+                  class="card-img-top p-2 h-50 w-50"
+                  alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1 ;"
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    class="my-2"
+                    ><%=product.brand.name%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 my-3"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+
+      <div class="line-break text-center py-2">
+        <span class="shadow-heading" style="font-size: 2rem">POPULAR BRANDS</span>
+      </div>
+
+
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">Samsung</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div
+          class="row row-cols-1 row-cols-md-4 g-4 mb-3 justify-content-center"
+        >
+          <% samsung.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-60 border-0 p-3">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product. frontImage%>"
+                  class="card-img-top p-2 h-50 w-50"
+                  alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1 ;"
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    class="my-2"
+                    ><%=product.brand.name%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 my-3"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">Apple-iPhone</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div
+          class="row row-cols-1 row-cols-md-4 g-4 mb-3 justify-content-center"
+        >
+          <% apple.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-60 border-0 p-3">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product. frontImage%>"
+                  class="card-img-top p-2 h-50 w-50"
+                  alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1 ;"
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    class="my-2"
+                    ><%=product.brand.name%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 my-3"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+
+
+
+      
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+       
+        <span
+          ><a 
+            href="/products"
+            class="btn btn-outline-dark py-2 px-3 my-3"
+            style="font-size: 0.75rem;color: #d5d3d3;background-color: rgb(1, 7, 12);"
+            >SHOP NOW</a
+          ></span>
+      </div>
+          
+    </section>
+    <%- include('./partials/footer')%>
+  
+    <script>
+      if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
+   

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My  Phone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/932257d0ab.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="icon" href="/public/admin/icon/icon.png">
+  </head>
+  <body>
+
+    <%- body %>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+  </body>
+  <style>
+    
+    a{
+      text-decoration: none;
+      color:rgb(68, 68, 68)
+    }
+    h1,h2,h3,h4,h5,p{
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+  </style>
+  <script>
+    function resendOtp(){
+      location.reload()
+    }
+
+    function nizam(){   //function retrieves the content of an HTML element with the ID 'page', and then adds the CSS class "active" to the element with the ID matching the retrieved content.
+
+      let afbc=document.getElementById('page').innerHTML
+
+    document.getElementById(afbc).classList.add("active")
+    }
+//========== registration validation in user side============
+
+// emali vlalidation
+function mailValidator() {
+  const inputMail = $("#your_mail").val();
+  if (
+    inputMail.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+  ) {
+    $("#signin").prop("disabled", false);
+    $("#mailInvalid").empty();
+  } else {
+    $("#signin").prop("disabled", true);
+    $("#mailInvalid").html('<i class="fa fa-exclamation"></i>Invalid E-mail');
+  }
+}
+//number validation in userregistration
+    function numberValidator(){
+      const inputNumber = $("#your_no").val();
+      const numberReg = new RegExp("^[0-9]{10}$");
+      if(numberReg.test(inputNumber)){
+        $("#signin").prop("disabled",false);
+        $("#numberInvalid").empty();
+      }
+      else{
+        $("#signin").prop("disabled",true);
+        $('#numberInvalid').html('<i class= "fa fa-exclamation"></i>Invalid contact Number');
+      }
+    }
+
+    //password validation 
+    function passwordValidator(){
+      const inputPassword = $("#your_pass").val();
+      if(inputPassword.length >=8){
+        if(inputPassword.match(/^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$/)){
+          $("#signin").prop("disabled",false)
+          $("#passwordInvalid").empty()
+        }else{
+          $("#signin").prop("disabled", true);
+          $('#passwordInvalid').html('<i class="fa fa-exclamation"></i>Password must contain atlest a number and an alphabet');
+        }
+      }else{
+        $("#signin").prop("disabled", true);
+        $('#passwordInvalid').html('<i class="fa fa-exclamation"></i>Password must be atleast 8 characters');
+      }
+    }
+    // password visibilitty
+    function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("your_pass");
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
+    }
+  }
+      
+    
+  </script>
+  </html>
+  
+
+  
+
+  <!-- <script>
+   
+
+      let rate
+      let productIndex
+
+      function amountChanger(proRate,i){
+        rate=proRate
+        productIndex=i
+      }
+    
+      function addToCart(productId,increment,feedBackFromWishList){
+        
+          $.ajax({
+              url:'/cart/addtocart?productId='+productId+'&increment='+increment+`&fromWishList=${feedBackFromWishList}`,
+              method:'get',
+              success:(response)=>{
+
+                  if(response.status){
+                      let cartCount=$('#cartCount').html()
+                      cartCount=parseInt(cartCount)+parseInt(increment)
+                      $('#cartCount').html(cartCount)
+
+                      let productCount=$('#'+productId).html()
+                      productCount=parseInt(productCount)+parseInt(increment)
+                      $('#'+productId).html(productCount)
+
+
+                      let amount=$('#totalAmount').html()
+                      if(amount){
+                        
+                        let productAmount=$('#'+productIndex).html()
+                        let splitStringOne=productAmount.split(' ')
+                        productAmount=splitStringOne[1]
+                        productAmount=parseInt(productAmount)+parseInt(rate)
+                        splitStringOne[1]=productAmount
+                        productAmount=splitStringOne.join(' ')
+                        $('#'+productIndex).html(productAmount)
+
+                        let splitStringTwo=amount.split(' ')
+                        amount=splitStringTwo[1]
+                        amount=parseInt(amount)+parseInt(rate)
+                        splitStringTwo[1]=amount
+                        amount=splitStringTwo.join(' ')
+                        $('#totalAmount').html(amount)
+                      }
+
+                  }
+                  if(feedBackFromWishList){
+                    $("#mainDivWishlist").load('/wishlist')
+                  }
+                  if(response.productQuantityReachedZero){
+                    $("#mainDivCart").load('/cart')
+                  }
+                  if(response.notLoggedIn){
+
+                    alert('logginFirst')
+                  }
+
+              }
+          })
+      }
+
+      function addToWishlist(productId){
+        $.ajax({
+          url:"/wishlist/addtowishlist?productId="+productId,
+          method:'get',
+          success:(response)=>{
+
+            if(response.notLoggedIn){
+              alert('logginFirst')
+            }
+            else if(response.productAlreadyExist){
+                alert('product exists')
+            }
+            else{
+              alert('product added to Wishlist')
+            }
+              
+          }
+        })
+      }
+
+
+      function selected(orderStatus,orderId){
+        $.ajax({
+              url:'/admin/orders/statuschange?status='+orderStatus+'&orderId='+orderId,
+              method:'get',
+              success:(response)=>{
+                  if(response.status){
+
+                    $('#'+orderId).html(orderStatus)
+                  }
+              }
+          })
+          }
+        
+        function applyCoupon(totalAmount){
+          event.preventDefault()//to prevent the action of form submition
+          var inputValue = document.getElementById('couponCode').value
+          $.ajax({
+              url:'/checkout/coupon/applied?couponCode='+inputValue,
+              method:'get',
+              success:(response)=>{
+                  
+                  if(response.coupon=='appliedNow'){
+                    $('#display').html('you are eligible')
+                    let discount=parseInt(response.couponData.discount/100*totalAmount*(-1))
+                    $('#couponDiscount').html(discount)
+                    let netAmount=parseInt(totalAmount)+discount
+                    $('#netAmount').html(netAmount)
+                    $('#netAmountValue').val(netAmount)
+                    $('#appliedCouponCode').val(response.couponData.couponCode)
+
+                  }else if(response.coupon=='alreadyApplied'){
+                    $('#display').html('Coupon already applied')
+                  }else if(response.coupon=='invalid'){
+                    $('#display').html('Coupon is invalid')
+                  }
+              }
+          })
+
+        }
+
+        function jithin(){
+
+          let afbc=document.getElementById('page').innerHTML
+          
+              document.getElementById(afbc).classList.add("active")
+        }
+
+        function selectAddress(
+          houseName,
+          area,
+          landmark,
+          city,
+          pin,
+          state
+        )
+        {
+          document.getElementById("houseName").value =houseName,
+          document.getElementById("area").value =area,
+          document.getElementById("landmark").value =landmark,
+          document.getElementById("city").value =city,
+          document.getElementById("pin").value =pin,
+          document.getElementById("state").value =state
+        }
+
+        function deleteAddress(addressId){
+          $.ajax({
+            url:'/checkout/delete/address?addressId='+addressId,
+            method:'get',
+            success:(response)=>{
+              location.reload()
+            }
+          })
+        }
+
+        function addAddress(){
+          event.preventDefault()//to prevent the action of form submition
+          let data={}
+          data.houseName = document.getElementById('houseName').value
+          data.area= document.getElementById('area').value
+          data.landmark= document.getElementById('landmark').value
+          data.city= document.getElementById('city').value
+          data.pin= document.getElementById('pin').value
+          data.state= document.getElementById('state').value
+          $.ajax({
+            url:'/checkout/add/address',
+            method:'post',
+            data:data,
+            success:(response)=>{
+              location.reload()
+            }
+          })
+
+        }
+   </script> 
+  
+  

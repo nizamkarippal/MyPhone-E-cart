@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../E-comproject/Furniture-Kart-Ecommerce-website-master/Furniture-Kart-Ecommerce-website-master"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Furniture-Kart-Ecommerce-website-master"
+	}
+}

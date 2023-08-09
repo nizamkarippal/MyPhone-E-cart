@@ -1,0 +1,103 @@
+<head>
+    <link rel="stylesheet" href="/user/css/userLoginPage.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .searchBox{
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/navBarLeft')%>
+    <div style="height:5vw"></div>
+    <div class="container loginPageOverrides">
+      <section class="sign-in">
+        <div class="container">
+          <div class="signin-content">
+            <div class="signin-image">
+              <figure>
+                <img class="d-md-block d-sm-none " src="/public/user/images/logo img.avif" alt="sing up image" />
+              </figure>
+              
+            </div>
+  
+            <div class="signin-form">
+              <h2 class="form-title">Register</h2>
+              <form
+                action="/registration/Otp"
+                method="POST"
+                class="register-form"
+                id="login-form"
+              >
+              <div class="form-group">
+                <input type="text"  name="Name" id="your_name" placeholder=" name" required/>
+              </div>
+              <!-- <div class="form-group">
+                <input type="text"  name="lName" id="your_name" placeholder="last" required/>
+              </div> -->
+              <div class="form-group">
+                <input type="number"  name="phonenumber" id="your_no" onkeyup="numberValidator()"  placeholder="PhoneNumber"  required/>
+                <span
+                id="numberInvalid"
+                class="text-danger rounded"
+                style="font-size: 0.75rem; text-transform: none"
+              ></span>
+              </div>
+                <div class="form-group">
+                  <input type="email"  name="email" id="your_mail"   onkeyup="mailValidator()" placeholder="Email" required/>
+                  <span
+                  id="mailInvalid"
+                  class="text-danger rounded"
+                  style="font-size: 0.75rem; text-transform: none"
+                ></span>
+                </div>
+                
+                
+                <div class="form-group d-flex">
+                  
+                   
+                    <input 
+                    type="password"
+                    name="password"
+                    id="your_pass"
+                    onkeyup="passwordValidator()"
+                    placeholder="Password "
+                    
+                    required
+                   
+                  /> 
+                  <i class="fa-light fa-eye"
+                  onclick="togglePasswordVisibility()"></i>     
+                 
+                </div>
+                <span
+                id="passwordInvalid"
+                class="text-danger rounded"
+                style="font-size: 0.75rem; text-transform: none"
+              ></span>
+                <% if(warning){%>
+                  <p style="color:black">Email id is already registered</p>  
+                <%}%>
+                
+                <div class="form-group form-button">
+                  <input
+                    type="submit"
+                    name="signin"
+                    id="signin"
+                    class="form-submit"
+                    value="Proceed"
+                  />
+                </div>
+              </form>
+              <p class="message">Already registered? <a href="/login">Sign In</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      </div>
+      <%- include('./partials/footer')%>
+      </body>
+
+
+      

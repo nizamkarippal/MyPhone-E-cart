@@ -1,0 +1,80 @@
+<head>
+  <link rel="stylesheet" href="/user/css/userLoginPage.css" />
+  
+</head>
+<body>
+  <div class="container loginPageOverrides">
+    <section class="sign-in">
+      <div class="container">
+        <div class="signin-content">
+
+          <div class="signin-form">
+            <h2 class="form-title">OTP</h2>
+            <form
+              action="/registration/otpRecieved"
+              method="POST"
+              class="register-form"
+              id="login-form"
+            >
+            <div class="form-group">
+              <input type="number"  name="otp" id="your_name" placeholder="Enter OTP" required/>
+            </div>
+           
+          
+            
+              <div class="form-group form-button">
+                <input
+                  type="submit"
+                  name="signin"
+                  id="submitButton"
+                  class="form-submit"
+                  value="Proceed"
+                />
+              </div>
+              <% if(warning){%>
+                <p style="color:black"><%=warning%></p>  
+              <%}%>
+            </form>
+              <button class="btn btn-danger mt-2 " id="resend-button" btn btn-dark onclick="resendOtp()">Resend OTP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    function disable(){
+    
+        const resend_button= document.getElementById("resend-button")
+        resend_button.disabled = true;
+    
+    }
+    disable()//actually it is evolking onload
+    
+    setTimeout(function(){
+        const resend_button= document.getElementById("resend-button")
+        resend_button.disabled = false;
+        const submitButton= document.getElementById("submitButton")
+        submitButton.disabled=true
+
+    },60000)
+    
+    let count =60
+    const timerDiv = document.getElementById('resend-button');
+    
+    const timer = setInterval(function() {
+      count--;
+      if(count>0){
+        timerDiv.textContent = 'Resend OTP in '+count+'s';
+      }
+      else{
+        timerDiv.textContent='Resend OTP'
+      }
+     
+    }, 1000);
+    
+    setTimeout(function() {
+      clearInterval(timer);
+    },60000);
+    </script>
+  
+</body>

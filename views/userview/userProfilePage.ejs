@@ -1,0 +1,61 @@
+<body>
+    <style>
+      .searchBox{
+        display: none !important;
+      }
+    </style>
+      <%- include('./partials/navBarLeft')%>
+      <div style="height:5vw" class="my-3"></div>
+      <div class="container mt-3 d-flex justify-content-center">
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Full Name</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0"><%= userData.fName %> <%= userData.lName %></p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0"><%= userData.email %></p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">password</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0"></button></a><a href="/change/password?userId=<%= userData._id %>"><button type="button"
+                        class="btn btn-dark btn-block btn-lg mt-3" data-mdb-ripple-color="dark">
+                        ChangePassword
+                      </button></a></p>
+                  </div>
+                </div>
+                <hr />
+                
+                <div class="row">
+                  <div class="col-sm-3">
+                    <a href="/edit/account"
+                      ><button
+                        type="button"
+                        class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark"
+                      >
+                        Edit Profile
+                        </button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <%- include('./partials/footer')%>
+  </body>

@@ -1,0 +1,83 @@
+
+    <% if (searchResult1.length> 0) { %>
+      <% searchResult1.forEach(product=> { %>
+        <div class="text-center"
+          style="display: flex; justify-content: center; margin-top: 50px;margin-bottom: 40px;">
+          <div class="col-lg-3 col-md-4 col-sm-6 m-2">
+            <div class="card h-100 border-1">
+              <a href="/products/<%=product._id%>">
+                <img src="/public/img/products/<%=product.thumbnail%>" class="card-img-top p-3 h-50 w-50;" alt="..."
+                  style="object-fit: scale-down; aspect-ratio: 1;" />
+                <div class="card-body">
+                  <h6 class="card-title text-dark">
+                    <%=product.name%>
+                  </h6>
+                  <span style="font-weight: bold; color: #7f7f7f; font-size: 0.75rem;">
+                    <%=product.brand.name%>
+                  </span>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title text-dark">₹ <%=product.RAMROM[0].price%>
+                  </h6>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+          <% } else if(searchResult1.length===0) { %>
+
+
+            <!-- Render no matching results found section -->
+            <div class="text-center my-3">
+              <div class="text-center" style=" justify-content: center; margin-top: 150px; margin-bottom: 150px;">
+                <p>No matching results found.</p>
+              </div>
+            </div>
+            <% } %>
+
+
+            <%if(similarProducts){%>
+              <!-- similar Products -->
+              <div class="line-break text-center py-4">
+               <span class="shadow-heading" style="font-size: 1rem">SIMILAR PRODUCTS</span>
+             </div>
+             <div class="text-center d-flex justify-content-center flex-column my-3">
+               <div class="row row-cols-1 row-cols-md-4 justify-content-center">
+                 <% similarProducts.forEach((product,i)=>{%>
+                   <div class="col-lg-3 my-2 mb-5">
+                     <div class="card h-100 border-0">
+                       <a href="/products/<%=product._id%>">
+                         <img
+                           src="/public/img/products/<%=product.thumbnail%>"
+                           class="card-img-top px-4 pt-2 h-75"
+                           alt="..."
+                           style="object-fit: scale-down; aspect-ratio: 1;"
+                         />
+                         <div class="card-body h-50">
+                           <h6 class="card-title text-dark"><%=product.name%></h6>
+                           <span style="font-weight: bold; color: #7f7f7f; font-size: 0.75rem;">
+                             <%=product.brand.name%>
+                           </span>
+                           <br>
+                         </div>
+                       </a>
+                     </div>
+                   </div>
+                 <%})%>
+               </div>
+               
+               <span
+                 ><a 
+                    href="/products"
+                   class="btn btn-outline-dark py-2  px-3 my-5"
+                   style="font-size: 0.75rem"
+                   >SHOW MORE</a
+                 ></span
+               >
+             </div>
+             <%}%>
+
+
+
+         
