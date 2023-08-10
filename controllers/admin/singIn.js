@@ -21,7 +21,7 @@ exports.adminVerification = async(req, res)=> {
              const inputPassword = req.body.password;
              const inputEmail = req.body.email.toLowerCase();
              const adminFind = await adminCLTN.findOne({email : inputEmail});
-             console.log(adminFind);
+             
              if(adminFind){
                   if(adminFind.password === inputPassword){
                         req.session.admin = req.body.email;

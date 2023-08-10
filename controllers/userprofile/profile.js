@@ -32,6 +32,7 @@ exports.profilePage = async(req,res)=>{
     }
     catch (error) {
         console.log("Error in Profile Page", error);
+        res.render('404Error')
     }
 }
 

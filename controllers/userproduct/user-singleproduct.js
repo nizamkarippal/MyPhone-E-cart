@@ -86,7 +86,7 @@ exports.view = async(req,res)=>{
    }
     catch(err){
         console.log('Error in single-Product Page' +err);
-
+        res.render('404Error')
     }
 }
 

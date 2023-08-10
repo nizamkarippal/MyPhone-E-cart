@@ -49,14 +49,14 @@ const productListing = require('./routes/user-productRouter');
 app.use('/',productListing)
 
 
-// app.use('*',(req,res,next)=>{
-//   next(createError(404))
-// })
+app.use('*',(req,res,next)=>{
+  next(createError(404))
+})
 
-// app.use((err,req,res,next)=>{//error handling middle-ware
+app.use((err,req,res,next)=>{//error handling middle-ware
 
-//   res.status(404).render('404Error')
-// })
+  res.status(404).render('404Error')
+})
 
 
 

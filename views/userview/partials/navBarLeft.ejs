@@ -51,9 +51,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
-            <li class="nav-item">
+             <li class="nav-item">
               <% if(userData){%>
-                <a class="nav-link" href="/cart?userId=<%=userData._id %>">Cart<span class="badge text-bg-success" id="cartCount"><%= cartCount %></span><i class="fa-solid fa-cart-shopping text-primary"></i></a>
+                <a  class="nav-link" href="/cart?userId=<%=userData._id %>">Cart<span
+                  class="badge text-bg-success" id="cartCount">
+                  <%= cartCount %>
+              </span><i class="fa-solid fa-cart-shopping text-primary"></i></a>
               <%}
               else{%>
                 <a class="nav-link" href="/login">Cart <i class="fa-solid fa-cart-shopping text-primary"></i></a>

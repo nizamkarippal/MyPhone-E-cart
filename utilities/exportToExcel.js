@@ -15,14 +15,16 @@ exports.download = async (req, res) => {
           { header: "Delivery", key: "orderStatus", width: 20 },
           { header: "Quantity", key: "item" },
           { header: "BIll Amount", key: "finalPrice", width: 15 },
-        //   { header: "Revenue", key: "reportPrice" , width: 15},
+        
         ];
         let counter = 1; //couter for SI.No
         let total = 0; // total value of all Orders
         let reportPrice = 0;
         // dates for from filer
         const fromDate = new Date(req.query.fromDate);
+        fromDate.setHours(0, 0, 0, 0); // Set time to start of the day
         const toDate = new Date(req.query.toDate);
+        toDate.setHours(23, 59, 59, 999); // Set time to end of the day
         const saledata = await orderCLTN
           .find({
             orderedOn : {

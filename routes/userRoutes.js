@@ -1,10 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const imageUpload = require('../utilities/imgeUpload');
-const imageProcessor  = require('../utilities/imageProcessor');
 const croppedImgupload = require('../utilities/croppedImgupload')
-
-
 const userController =require('../controllers/usercontroller')
 const  userSession= require('../middlewares/userSessionMD')
 const address = require('../controllers/userprofile/address')

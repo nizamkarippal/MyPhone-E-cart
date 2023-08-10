@@ -39,6 +39,7 @@ const currentUser = await userCollection.findById(usersId);
 
     } catch (error) {
           console.log('Error in View all Orders Page : ' + error);
+          res.render('404Error')
     }
 };
 

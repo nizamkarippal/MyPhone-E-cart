@@ -28,6 +28,7 @@ try{
 }
 catch(err){
     console.log("Error in address View Page", err);
+    res.render('404Error')
 }
 }
 // add new address

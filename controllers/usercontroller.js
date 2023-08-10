@@ -24,6 +24,7 @@ const home = async(req,res)=>{
                 }
 
             }
+       
         let  currentUser = null;
         if(req.session.userData){
           
@@ -64,7 +65,7 @@ const home = async(req,res)=>{
 
             session:req.session.userData,
             currentUser,
-            cartCount : req.session.cartCount,
+            cartCount ,
             ios,
             android,
             newReleases,
@@ -79,6 +80,7 @@ const home = async(req,res)=>{
     }
     catch(err){
         console.log('home page render'+err);
+        res.render('404Error')
     }
 }
 
@@ -131,6 +133,7 @@ const userValidation = async(req,res)=>{
         }
         catch(err){
             console.log('login page error'+err);
+            res.render('404Error')
         }
 }
 
@@ -151,9 +154,9 @@ const userValidation = async(req,res)=>{
         try{
             
             let user
-            console.log(req.body);
+           
             user = await userCollection.findOne({email:req.body.email})
-            console.log(user);
+            
             if(user){
                 res.redirect(`/registration?warning=${true}`)
             }
@@ -263,7 +266,7 @@ const forgotPasswordOtppage = async(req,res)=>{
         if(userData){
             if(!warning){
                 let otpgen = otpfunctions.otp()
-                console.log(otpgen);
+               
                 let mailOptions = otpfunctions.mailObject(userEmail,otpgen)
                 otpfunctions.mailService(mailOptions)
                 req.session.forgotPasswordOtp=otpgen
@@ -287,8 +290,7 @@ const forgotPasswordNewPasswordPage = async(req,res)=>{
         let expiryTime = req.session.forgotPasswordOtpExpiry
         let otp = req.session.forgotPasswordOtp
         let userEmail = req.body.userEmail
-        console.log(currentTime);
-        console.log(expiryTime);
+        
         if(currentTime <= expiryTime && otp == req.body.otp){
             console.log(otp);
             res.render('userview/forgotpasswordNewPasswordPage',{userEmail})
@@ -403,6 +405,7 @@ const viewAll = async(req,res)=>{
     }
     catch(err){
         console.log("error view wishlist"+err);
+        res.render('404Error')
     }
 }
 //whishlist add product from product single page
@@ -477,7 +480,7 @@ const viewcartAll = async(req,res)=>{
        .populate({path:'products.name',
         populate:{path:'brand',model:'brands-collections'}}).exec();
       
-
+    
         const quantityInStock = userCart.products.map((item, i)=> item.name.RAMROM[0].quantity);
 
          res.render('userview/product-index/cart',{
@@ -490,6 +493,7 @@ const viewcartAll = async(req,res)=>{
     }
     catch(err){
         console.log('error in cart page'+err);
+        res.render('404Error')
     }
 }
 
@@ -534,7 +538,7 @@ try{
     const wishlistCheck = await wishlistCollection.findOne({
         customer:currentUser._id,
         products:new mongoose.Types.ObjectId(productId),});
-      console.log(wishlistCheck);
+      
     if(wishlistCheck){
         await wishlistCollection.findByIdAndUpdate(wishlistCheck._id,//particular user wishlist documment
             {$pull:{products:productId}}) ;
@@ -548,7 +552,7 @@ try{
    products:{$elemMatch:{name:new mongoose.Types.ObjectId(productId),ramCapacity:ramCapacity}}});
 
    if(productExist){
-    console.log("rfh");
+    
        await cartCollection.updateOne({
         _id:userCart._id,
         products:{$elemMatch:{name:new mongoose.Types.ObjectId(productId),ramCapacity:ramCapacity}}},
@@ -712,6 +716,7 @@ const addCount = async (req,res)=>{
     
     catch(err){
         console.log("counting products"+ err) ;
+        res.render('404Error')
     }
 }
 

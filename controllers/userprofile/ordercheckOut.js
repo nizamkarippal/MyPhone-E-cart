@@ -67,6 +67,7 @@ try{
 }
 catch(err){
     console.log("Error in checkout page", err);  // log error to console
+    res.render('404Error')
 }
 }
 

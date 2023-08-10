@@ -7,6 +7,21 @@ const brandCLTN = require('../../model/admin/brandSchema')
 // sinle search from home page
 exports.singleview =  async(req,res)=>{
   try{
+    let cartCount = 0
+
+        let userCart = await cartCollection.findOne({ customer: req.session?.userData?._id });
+        
+        if (userCart) {
+            for (let i = 0; i < userCart.products.length; i++) {
+                cartCount += userCart.products[i].quantity
+            }
+
+        }
+        let currentUser = null;
+        if (req.session.userData) {
+            currentUser = await userCollection.findOne({ _id: req.session.userData._id })
+        }
+
     const search = req.query.search
     
     let  searchResult1 = []
@@ -20,18 +35,27 @@ exports.singleview =  async(req,res)=>{
         listed: true,
     }).populate('brand category');
      };
-     console.log(searchResult1);
-     const brandId = searchResult1[0].brand._id;
-     let similarProducts = await productCLTN.find({'brand':brandId}).populate(['category','brand']);
-     similarProducts = similarProducts.filter((product)=>product.name != searchResult1.name);
 
-     res.render('userview/singlesearch',{
+
+     let similarProducts = []; // Define similarProducts outside the conditional block
+  
+     if (searchResult1.length > 0) {
+       const brandId = searchResult1[0].brand._id;
+       similarProducts = await productCLTN.find({ 'brand': brandId }).populate(['category', 'brand']);
+       similarProducts = similarProducts.filter((product) => product.name != searchResult1.name);
+     }
+ 
+    res.render('userview/singlesearch',{
         searchResult1,
-        similarProducts
+        similarProducts,
+        cartCount,
+        currentUser,
+        userData: req.session.userData,
      })
   }
   catch(err){
     console.log("error", err);
+    res.render('404Error')
   }  
 };
 
@@ -105,6 +129,7 @@ exports.collection = async (req, res) => {
 
     catch (err) {
         console.log('product collectons not found' + err);
+        res.render('404Error')
     }
 }
 

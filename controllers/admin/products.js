@@ -172,7 +172,7 @@ exports.editProduct = async(req,res)=>{
     req.body.category = new mongoose.Types.ObjectId(req.body.category);
     req.body.brand = new mongoose.Types.ObjectId(req.body.brand);
     await productCLTN.findByIdAndUpdate(req.query.id, req.body);
-    console.log("Product Edited Successfully");
+    
     res.redirect('/admin/product_management');
 }
     catch(error){

@@ -106,6 +106,7 @@ exports.chartData = async (req,res)=>{
             }
         },
     ]);
+   
     let inTransit, cancelled , delivered , returnedOrders , refunded;
     orders.forEach((order , i )=>{
         if(order._id === "in-transit"){
